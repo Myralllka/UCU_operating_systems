@@ -1,0 +1,6 @@
+www.viva64.com/en/w:1:1: error: Help: The documentation for all analyzer warnings is available here: https://www.viva64.com/en/w/.
+/home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.cpp:24:1: warning: V112 Dangerous magic number 4 used: ...e(fd, &buf, 4);.
+/home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.cpp:26:1: warning: V2005 C-style explicit type casting is utilized. Consider using: static_cast/const_cast/reinterpret_cast.
+/home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.cpp:40:1: warning: V2005 C-style explicit type casting is utilized. Consider using: static_cast/const_cast/reinterpret_cast.
+/home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.cpp:58:1: warning: V2005 C-style explicit type casting is utilized. Consider using: static_cast/const_cast/reinterpret_cast.
+/home/myralllka/Documents/OS/lab2_mycat/src/options_parser.cpp:26:1: warning: V2014 Don't use the 'exit' function in library code.

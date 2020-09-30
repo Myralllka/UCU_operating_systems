@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug",
+  "command": "/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -I/home/myralllka/Documents/OS/lab2_mycat/inc -O3 -DNDEBUG -Wall -Wextra -Wpedantic -std=gnu++17 -o CMakeFiles/mycat.dir/src/main.cpp.o -c /home/myralllka/Documents/OS/lab2_mycat/src/main.cpp",
+  "file": "/home/myralllka/Documents/OS/lab2_mycat/src/main.cpp"
+},
+{
+  "directory": "/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug",
+  "command": "/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -I/home/myralllka/Documents/OS/lab2_mycat/inc -O3 -DNDEBUG -Wall -Wextra -Wpedantic -std=gnu++17 -o CMakeFiles/mycat.dir/src/file_interface/file_interface.cpp.o -c /home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.cpp",
+  "file": "/home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.cpp"
+},
+{
+  "directory": "/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug",
+  "command": "/usr/bin/c++ -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -I/home/myralllka/Documents/OS/lab2_mycat/inc -O3 -DNDEBUG -Wall -Wextra -Wpedantic -std=gnu++17 -o CMakeFiles/mycat.dir/src/options_parser.cpp.o -c /home/myralllka/Documents/OS/lab2_mycat/src/options_parser.cpp",
+  "file": "/home/myralllka/Documents/OS/lab2_mycat/src/options_parser.cpp"
+}
+]

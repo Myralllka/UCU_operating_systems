@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../inc/file_interface/file_interface.h
+cstring
+-
+malloc.h
+-
+unistd.h
+../inc/file_interface/unistd.h
+
+../inc/options_parser.h
+boost/program_options.hpp
+-
+string
+-
+iostream
+-
+fstream
+-
+
+/home/myralllka/Documents/OS/lab2_mycat/src/main.cpp
+iostream
+-
+options_parser.h
+/home/myralllka/Documents/OS/lab2_mycat/src/options_parser.h
+file_interface/file_interface.h
+/home/myralllka/Documents/OS/lab2_mycat/src/file_interface/file_interface.h
+fcntl.h
+-
+array
+-
+
