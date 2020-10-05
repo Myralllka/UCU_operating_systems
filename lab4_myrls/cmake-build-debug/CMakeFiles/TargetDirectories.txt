@@ -1,0 +1,4 @@
+/home/myralllka/Documents/OS/lab4_myrls/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/myralllka/Documents/OS/lab4_myrls/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/myralllka/Documents/OS/lab4_myrls/cmake-build-debug/CMakeFiles/test.analyze.dir
+/home/myralllka/Documents/OS/lab4_myrls/cmake-build-debug/CMakeFiles/test.dir

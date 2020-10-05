@@ -1,0 +1,27 @@
+/opt/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/myralllka/Documents/OS/lab4_myrls
+-- The CXX compiler identification is GNU 10.2.0
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ - works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Boost: /usr/lib64/cmake/Boost-1.72.0/BoostConfig.cmake (found suitable version "1.72.0", minimum required is "1.71.0") found components: program_options 
+-- Try GNU MemorySanitizer flag = [-g -fsanitize=memory]
+-- Performing Test MSan_FLAG_DETECTED
+-- Performing Test MSan_FLAG_DETECTED - Failed
+CMake Warning at cmake/sanitizers/sanitize-helpers.cmake:150 (message):
+  MemorySanitizer is not available for GNU compiler.  Targets using this
+  compiler will be compiled without MemorySanitizer.
+Call Stack (most recent call first):
+  cmake/sanitizers/FindMSan.cmake:46 (sanitizer_check_compiler_flags)
+  cmake/sanitizers/FindSanitizers.cmake:39 (find_package)
+  CMakeLists.txt:41 (find_package)
+
+
+-- Try GNU UndefinedBehaviorSanitizer flag = [-g -fsanitize=undefined]
+-- Performing Test UBSan_FLAG_DETECTED
+-- Performing Test UBSan_FLAG_DETECTED - Success
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/myralllka/Documents/OS/lab4_myrls/cmake-build-debug
