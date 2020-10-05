@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/myralllka/Documents/OS/lab4_myrls/cmake-build-debug",
-  "command": "/usr/bin/c++  -DBOOST_ALL_NO_LIB -DBOOST_PROGRAM_OPTIONS_DYN_LINK -I/home/myralllka/Documents/OS/lab4_myrls/inc  -g    -g -fsanitize=undefined  -Wall -Wextra -Wpedantic -Werror -std=gnu++17 -o CMakeFiles/test.dir/src/main.cpp.o -c /home/myralllka/Documents/OS/lab4_myrls/src/main.cpp",
-  "file": "/home/myralllka/Documents/OS/lab4_myrls/src/main.cpp"
-}
-]
