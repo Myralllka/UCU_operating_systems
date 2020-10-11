@@ -1,14 +1,16 @@
 cmake_minimum_required(VERSION 3.15)
 
-set(PROJECT_NAME test)
+set(PROJECT_NAME myrls)
 project(${PROJECT_NAME} CXX)
 
 set(CMAKE_CXX_STANDARD 17)
-
+set(CMAKE_CXX_COMPILER clang++)
 # Options
 option(WARNINGS_AS_ERRORS "Treat compiler warnings as errors." ON)
-option(ENABLE_SANITIZERS "Use sanitizers to detect errors." ON)
+option(ENABLE_SANITIZERS "Use sanitizers to detect errors." OFF)
 option(ENABLE_CONAN "Use Conan as a package manager." OFF)
+
+set(CMAKE_BUILD_TYPE Debug)
 
 # Set output directories
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
@@ -24,7 +26,7 @@ include(cmake/config.cmake)
 include_directories(inc)
 
 # Project source compilation
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp src/options_parser.cpp)
 
 # Add external packages
 find_package(Boost 1.71.0 COMPONENTS program_options REQUIRED)
