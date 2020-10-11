@@ -5,7 +5,7 @@
 #include <ftw.h>
 #include <pwd.h>
 #include "options_parser.h"
-#include <time.h>
+#include <ctime>
 #include <sys/stat.h>
 #include <boost/algorithm/string/case_conv.hpp>
 
@@ -35,16 +35,14 @@ static int save_names([[maybe_unused]] const char *fpath,
     return 0;
 }
 
-bool compare_nocase (const std::string& first, const std::string& second)
-{
-    size_t i=0;
-    while ( (i<first.length()) && (i<second.length()) )
-    {
-        if (tolower(first[i])<tolower(second[i])) return true;
-        else if (tolower(first[i])>tolower(second[i])) return false;
+bool compare_nocase(const std::string &first, const std::string &second) {
+    size_t i = 0;
+    while ((i < first.length()) && (i < second.length())) {
+        if (tolower(first[i]) < tolower(second[i])) return true;
+        else if (tolower(first[i]) > tolower(second[i])) return false;
         ++i;
     }
-    return ( first.length() < second.length() );
+    return (first.length() < second.length());
 }
 
 int main(int argc, char **argv) {
@@ -72,14 +70,19 @@ int main(int argc, char **argv) {
                   });
     }
     std::string buff;
-    buff.reserve(200);
+    char *linkname = new char[256];
+    buff.reserve(255);
     for (auto &dir_entry: dirs) {
         std::cout << "\n" << dir_entry.first << ":\n";
         for (auto &file: dir_entry.second) {
             auto sb = std::get<1>(file);
-//            std::cout << dir_entry.first << ": " << std::get<0>(file) << std::endl;
             buff.clear();
-            strftime(buff.data(), 200, "%d.%m.%Y %H:%M:%S", localtime(&sb.st_mtim.tv_sec));
+
+            strftime(buff.data(), 255, "%d.%m.%Y %H:%M:%S", localtime(&sb.st_mtim.tv_sec));
+            if (auto tmp = (S_ISLNK(sb.st_mode) ? readlink(std::get<0>(file).c_str(), linkname, 255) : -1)) {
+                linkname[tmp] = '\0';
+            }
+            
             std::cout << ((sb.st_mode & S_IRUSR) ? "r" : "-")
                       << ((sb.st_mode & S_IWUSR) ? "w" : "-")
                       << ((sb.st_mode & S_IXUSR) ? "x" : "-")
@@ -92,10 +95,17 @@ int main(int argc, char **argv) {
                       << " " << getUser(sb.st_uid).data() << "\t"
                       << static_cast<intmax_t>(sb.st_size) << "\t"
                       << buff.data() << "\t"
-                      << (((S_IEXEC & sb.st_mode || !S_ISREG(sb.st_mode))) ? ((S_ISDIR(sb.st_mode)) ? "/" : (S_IEXEC & sb.st_mode) ? "*" : (S_ISLNK(sb.st_mode)) ? "@" : (S_ISSOCK(sb.st_mode)) ? "=" : (S_ISFIFO(sb.st_mode)) ? "|" : "?" ) : "")
+                      << (((S_IEXEC & sb.st_mode || !S_ISREG(sb.st_mode))) ? ((S_ISDIR(sb.st_mode)) ? "/" : \
+                      (S_ISLNK(sb.st_mode)) ? "@" : \
+                      (S_IEXEC & sb.st_mode) ? "*" : \
+                      (S_ISSOCK(sb.st_mode)) ? "=" : \
+                      (S_ISFIFO(sb.st_mode)) ? "|" : "?") : "")
                       << basename(std::get<0>(file).data())
+                      << ((S_ISLNK(sb.st_mode)) ? " => " : "")
+                      << ((S_ISLNK(sb.st_mode)) ? linkname : "")
                       << std::endl;
         }
     }
+    delete[] linkname;
     return 0;
 }
