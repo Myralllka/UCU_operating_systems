@@ -20,61 +20,45 @@ std::map<std::string, std::vector<file_description>> dirs;
 
 static int save_names([[maybe_unused]] const char *fpath,
                       [[maybe_unused]] const struct stat *sb,
-                      [[maybe_unused]] const int tflag,
-                      [[maybe_unused]] struct FTW *ftwbuf) {
-    std::string filename = fpath;
-    if (tflag == FTW_D) {
-        dirs[filename].emplace_back(filename, *sb, tflag);
-    }
-    if (ftwbuf->level > 0 or tflag == FTW_F) {
-        dirs[filename.substr(0,
-                             filename.find_last_of(basename(filename.data())) -
-                             strlen(basename(filename.data())))
-        ].emplace_back(filename, *sb, tflag);
-    }
-    return 0;
-}
+                      [[maybe_unused]] int tflag,
+                      [[maybe_unused]] struct FTW *ftwbuf);
 
-bool compare_nocase(const std::string &first, const std::string &second) {
-    size_t i = 0;
-    while ((i < first.length()) && (i < second.length())) {
-        if (tolower(first[i]) < tolower(second[i])) return true;
-        else if (tolower(first[i]) > tolower(second[i])) return false;
-        ++i;
-    }
-    return (first.length() < second.length());
-}
+bool compare_nocase(const std::string &first, const std::string &second);
 
 int main(int argc, char **argv) {
-
     command_line_options conf;
+    std::string buff;
+    char *linkname = new char[256];
+    buff.reserve(255);
+    std::vector<std::string> dir_names;
+    dir_names.reserve(dirs.size());
     conf.parse(argc, argv);
+
     if (conf.get_filenames().size() > 1) {
         std::cerr << "myrls: too many arguments" << std::endl;
     }
-    bool flags = false;
 
     if (nftw((conf.get_filenames().empty()) ? "." : conf.get_filenames()[0].data(),
              save_names,
              20,
-             flags | FTW_NS | FTW_MOUNT | FTW_PHYS | FTW_DEPTH) != -1) {
+             false | FTW_NS | FTW_MOUNT | FTW_PHYS | FTW_DEPTH) != -1) {
     } else {
         std::cerr << "ntfw error" << std::endl;
         return -1;
     }
 
-    for (auto &dir_entry: dirs) {
-        std::sort(dir_entry.second.begin(), dir_entry.second.end(),
+    for (auto &dir_entry: dirs)
+        dir_names.push_back(dir_entry.first);
+
+    std::sort(dir_names.begin(), dir_names.end(), compare_nocase);
+
+    for (std::string &dir_entry: dir_names) {
+        std::cout << "\n" << dir_entry << ":\n";
+        std::sort(dirs[dir_entry].begin(), dirs[dir_entry].end(),
                   [](file_description a, file_description b) {
                       return compare_nocase(std::get<0>(a), std::get<0>(b));
                   });
-    }
-    std::string buff;
-    char *linkname = new char[256];
-    buff.reserve(255);
-    for (auto &dir_entry: dirs) {
-        std::cout << "\n" << dir_entry.first << ":\n";
-        for (auto &file: dir_entry.second) {
+        for (auto &file: dirs[dir_entry]) {
             auto sb = std::get<1>(file);
             buff.clear();
 
@@ -107,5 +91,42 @@ int main(int argc, char **argv) {
         }
     }
     delete[] linkname;
+    return 0;
+}
+
+
+bool compare_nocase(const std::string &first, const std::string &second) {
+    size_t i = 0, j = 0;
+    while ((i < first.length()) && (j < second.length())) {
+        if (ispunct(first[i])) {
+            ++i;
+            continue;
+        }
+        if (ispunct(second[j])) {
+            ++j;
+            continue;
+        }
+        if (tolower(first[i]) < tolower(second[j])) return true;
+        else if (tolower(first[i]) > tolower(second[j])) return false;
+        ++i;
+        ++j;
+    }
+    return (first.length() < second.length());
+}
+
+static int save_names([[maybe_unused]] const char *fpath,
+                      [[maybe_unused]] const struct stat *sb,
+                      [[maybe_unused]] const int tflag,
+                      [[maybe_unused]] struct FTW *ftwbuf) {
+    std::string filename = fpath;
+    if (tflag == FTW_D) {
+        dirs[filename].emplace_back(filename, *sb, tflag);
+    }
+    if (ftwbuf->level > 0 or tflag == FTW_F) {
+        dirs[filename.substr(0,
+                             filename.find_last_of(basename(filename.data())) -
+                             strlen(basename(filename.data())))
+        ].emplace_back(filename, *sb, tflag);
+    }
     return 0;
 }
