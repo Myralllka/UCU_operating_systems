@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
             if (auto tmp = (S_ISLNK(sb.st_mode) ? readlink(std::get<0>(file).c_str(), linkname, 255) : -1)) {
                 linkname[tmp] = '\0';
             }
-            
+
             std::cout << ((sb.st_mode & S_IRUSR) ? "r" : "-")
                       << ((sb.st_mode & S_IWUSR) ? "w" : "-")
                       << ((sb.st_mode & S_IXUSR) ? "x" : "-")
