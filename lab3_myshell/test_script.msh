@@ -1,0 +1,4 @@
+#!/home/myralllka/Documents/OS/lab3_myshell/myshell
+# Absolute path is necessary in shebang.
+# My simple script
+ls
