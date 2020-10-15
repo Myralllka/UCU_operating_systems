@@ -81,9 +81,9 @@ int main(int argc, char **argv) {
                       << buff.data() << "\t"
                       << (((S_IEXEC & sb.st_mode || !S_ISREG(sb.st_mode))) ? ((S_ISDIR(sb.st_mode)) ? "/" : \
                       (S_ISLNK(sb.st_mode)) ? "@" : \
-                      (S_IEXEC & sb.st_mode) ? "*" : \
                       (S_ISSOCK(sb.st_mode)) ? "=" : \
-                      (S_ISFIFO(sb.st_mode)) ? "|" : "?") : "")
+                      (S_ISFIFO(sb.st_mode)) ? "|" : \
+                      (S_IEXEC & sb.st_mode) ? "*" : "?") : "")
                       << basename(std::get<0>(file).data())
                       << ((S_ISLNK(sb.st_mode)) ? " => " : "")
                       << ((S_ISLNK(sb.st_mode)) ? linkname : "")
@@ -98,11 +98,11 @@ int main(int argc, char **argv) {
 bool compare_nocase(const std::string &first, const std::string &second) {
     size_t i = 0, j = 0;
     while ((i < first.length()) && (j < second.length())) {
-        if (ispunct(first[i])) {
+        if (first[i] == '.') {
             ++i;
             continue;
         }
-        if (ispunct(second[j])) {
+        if (second[j] == '.') {
             ++j;
             continue;
         }
