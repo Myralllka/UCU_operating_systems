@@ -1,4 +1,0 @@
-/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug/CMakeFiles/mycat.analyze.dir
-/home/myralllka/Documents/OS/lab2_mycat/cmake-build-debug/CMakeFiles/mycat.dir

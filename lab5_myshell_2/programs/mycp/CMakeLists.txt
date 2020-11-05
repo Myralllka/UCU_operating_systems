@@ -11,11 +11,11 @@ option(ENABLE_SANITIZERS "Use sanitizers to detect errors." OFF)
 option(ENABLE_CONAN "Use Conan as a package manager." OFF)
 
 ## PVS Studio
-include(../../cmake/PVS-Studio.cmake)
+include(../../../cmake/PVS-Studio.cmake)
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Include fixed CMake configuration
-include(../../cmake/config.cmake)
+include(../../../cmake/config.cmake)
 
 ## include Headers
 include_directories(inc)
@@ -44,7 +44,7 @@ if (ENABLE_SANITIZERS)
     find_package(Sanitizers)
 
     # CMake targets to which apply sanitizers
-    add_sanitizers(${PROJECT_NAME})
+    add_sanitizers(operations ${PROJECT_NAME})
 endif ()
 
 #####################################

@@ -13,11 +13,11 @@ option(ENABLE_CONAN "Use Conan as a package manager." OFF)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin)
 
 ## PVS Studio
-include(cmake/PVS-Studio.cmake)
+include(../cmake/PVS-Studio.cmake)
 SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Include fixed CMake configuration
-include(cmake/config.cmake)
+include(../cmake/config.cmake)
 
 # Include headers
 include_directories(inc)
