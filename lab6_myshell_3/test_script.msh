@@ -1,4 +1,4 @@
-#!/home/myralllka/Documents/OS/lab6/myshell
+#!/home/myralllka/Documents/OS/lab6_myshell_3/myshell
 # Absolute path is necessary in shebang.
 # My simple script
 ls
